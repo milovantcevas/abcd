@@ -1,39 +1,43 @@
 package com.example.abcd;
 
-public class Attendance {
-    private int eventId;
-    private int memberId;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "attendances")
+class Attendance {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id")
+    private Event event;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
     private String status;
 
-    public Attendance(){}
+    public Attendance() {
+    }
 
-    public Attendance(int eventId, int memberId, String status) {
-        this.eventId = eventId;
-        this.memberId = memberId;
+    public Attendance(Long id, Event event, Member member, String status) {
+        this.id = id;
+        this.event = event;
+        this.member = member;
         this.status = status;
     }
 
-    public int getEventId() {
-        return eventId;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
+    public Event getEvent() { return event; }
+    public void setEvent(Event event) { this.event = event; }
 
-    public int getMemberId() {
-        return memberId;
-    }
+    public Member getMember() { return member; }
+    public void setMember(Member member) { this.member = member; }
 
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }

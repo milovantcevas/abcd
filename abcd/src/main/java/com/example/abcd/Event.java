@@ -1,61 +1,45 @@
 package com.example.abcd;
 
-public class Event {
-    private int id;
-    private String data;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "events")
+class Event {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private LocalDateTime datetime;
     private String title;
     private String description;
-    private String clubId;
 
-    public Event(){
-
+    public Event() {
     }
 
-    public Event(int id, String data, String title, String description, String clubId) {
+    public Event(Long id, LocalDateTime datetime, String title, String description, Club club) {
         this.id = id;
-        this.data = data;
+        this.datetime = datetime;
         this.title = title;
         this.description = description;
-        this.clubId = clubId;
+        this.club = club;
     }
 
-    public int getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "club_id")
+    private Club club;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getData() {
-        return data;
-    }
+    public LocalDateTime getDatetime() { return datetime; }
+    public void setDatetime(LocalDateTime datetime) { this.datetime = datetime; }
 
-    public void setData(String data) {
-        this.data = data;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(String clubId) {
-        this.clubId = clubId;
-    }
+    public Club getClub() { return club; }
+    public void setClub(Club club) { this.club = club; }
 }

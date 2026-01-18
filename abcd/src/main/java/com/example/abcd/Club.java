@@ -1,41 +1,31 @@
 package com.example.abcd;
+import jakarta.persistence.*;
 
-public class Club {
-    private int id;
+@Entity
+@Table(name = "clubs")
+class Club {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String title;
     private String description;
 
-    public Club(){
-
+    public Club() {
     }
 
-    public Club(int id, String title, String description) {
+    public Club(Long id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    public int getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }
